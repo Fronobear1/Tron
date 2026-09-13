@@ -33,7 +33,7 @@ const TRON_COLOR = 0x5865f2;
 
 // Put your banner URL here later.
 const TRON_BANNER_URL =
-  "https://YOUR-BANNER-URL-HERE.png";
+  "https://github.com/Fronobear1/Tron/blob/main/assets/tron-banner.png?raw=true";
 
 const GITHUB_URL =
   "https://github.com/YOUR_USERNAME/TRON-Code";
