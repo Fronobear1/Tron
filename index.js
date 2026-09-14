@@ -31,12 +31,15 @@ const client = new Client({
 
 const TRON_COLOR = 0x5865f2;
 
-// Put your banner URL here later.
+// Direct raw link to banner image or public hosted URL
 const TRON_BANNER_URL =
-  "https://github.com/Fronobear1/Tron/blob/main/assets/tron-banner.png?raw=true";
+  "https://raw.githubusercontent.com/Daksh-Saboo/Tron/main/tron-banner.png";
 
 const GITHUB_URL =
-  "https://github.com/YOUR_USERNAME/TRON-Code";
+  "https://github.com/Daksh-Saboo/Tron";
+
+const RELEASES_URL =
+  "https://github.com/Daksh-Saboo/Tron/releases";
 
 // ─────────────────────────────────────────────
 // READY
@@ -257,7 +260,6 @@ async function handleCommand(interaction) {
           "or browse the source code.\n\n" +
 
           "🚀 **Latest Release**\n" +
-          "`v0.4.1` • **Stable**\n" +
           "Recommended for most users."
         )
         .setColor(TRON_COLOR)
@@ -271,16 +273,17 @@ async function handleCommand(interaction) {
       // Buttons
       // ─────────────────────────────────────
 
-      const latest = downloads.latest;
+      const latestDownloadUrl = downloads?.latest?.download || RELEASES_URL;
+      const releasesUrl = downloads?.releases?.github || RELEASES_URL;
 
       const downloadButton = new ButtonBuilder()
         .setLabel("Download Latest")
         .setEmoji("⬇️")
         .setStyle(ButtonStyle.Link)
-        .setURL(latest.download);
+        .setURL(latestDownloadUrl);
 
       const githubButton = new ButtonBuilder()
-        .setLabel("GitHub")
+        .setLabel("GitHub Repository")
         .setEmoji("💻")
         .setStyle(ButtonStyle.Link)
         .setURL(GITHUB_URL);
@@ -289,7 +292,7 @@ async function handleCommand(interaction) {
         .setLabel("All Releases")
         .setEmoji("📦")
         .setStyle(ButtonStyle.Link)
-        .setURL(downloads.releases.github);
+        .setURL(releasesUrl);
 
       const buttons = new ActionRowBuilder()
         .addComponents(
@@ -381,8 +384,17 @@ async function handleSelectMenu(interaction) {
     return;
   }
 
-  const selected =
-    downloads[interaction.values[0]];
+  const selectedKey = interaction.values[0];
+  let selected = downloads[selectedKey];
+
+  // Fallback handler if source code is selected
+  if (selectedKey === "source" && !selected) {
+    selected = {
+      name: "Source Code",
+      description: "Access the official source code on GitHub.",
+      github: GITHUB_URL
+    };
+  }
 
   if (!selected) {
 
@@ -426,6 +438,9 @@ async function handleSelectMenu(interaction) {
 
   const buttons = [];
 
+  const downloadUrl = selected.download || RELEASES_URL;
+  const githubUrl = selected.github || GITHUB_URL;
+
   if (selected.download) {
 
     buttons.push(
@@ -433,19 +448,19 @@ async function handleSelectMenu(interaction) {
         .setLabel("Download")
         .setEmoji("⬇️")
         .setStyle(ButtonStyle.Link)
-        .setURL(selected.download)
+        .setURL(downloadUrl)
     );
 
   }
 
-  if (selected.github) {
+  if (selected.github || selectedKey === "source") {
 
     buttons.push(
       new ButtonBuilder()
         .setLabel("GitHub")
         .setEmoji("💻")
         .setStyle(ButtonStyle.Link)
-        .setURL(selected.github)
+        .setURL(githubUrl)
     );
 
   }
