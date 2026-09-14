@@ -5,8 +5,8 @@ module.exports = {
     status: "Stable",
     description:
       "The latest stable release of TRON-Code. Recommended for most users.",
-    download: "https://github.com/YOUR_USERNAME/TRON-Code/releases/latest",
-    github: "https://github.com/YOUR_USERNAME/TRON-Code"
+    download: "https://github.com/Daksh-Saboo/Tron/releases/latest",
+    github: "https://github.com/Daksh-Saboo/Tron"
   },
 
   releases: {
@@ -16,7 +16,7 @@ module.exports = {
     description:
       "Browse previous TRON-Code releases and choose a specific version.",
     github:
-      "https://github.com/YOUR_USERNAME/TRON-Code/releases"
+      "https://github.com/Daksh-Saboo/Tron/releases"
   },
 
   experimental: {
@@ -26,7 +26,7 @@ module.exports = {
     description:
       "Try upcoming and experimental TRON-Code builds. These may contain unfinished features.",
     github:
-      "https://github.com/YOUR_USERNAME/TRON-Code/releases"
+      "https://github.com/Daksh-Saboo/Tron/releases"
   },
 
   source: {
@@ -36,6 +36,6 @@ module.exports = {
     description:
       "Explore, fork and contribute to the TRON-Code source code.",
     github:
-      "https://github.com/YOUR_USERNAME/TRON-Code"
+      "https://github.com/Daksh-Saboo/Tron/tree/main"
   }
 };
